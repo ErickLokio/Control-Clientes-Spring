@@ -1,0 +1,47 @@
+<html xmlns:th="htt://www.thymeleaf.org">
+    <head th:replace="plantillas/plantilla :: head">
+        <title>LOGIN</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <header th:replace="plantillas/plantilla :: header"></header>
+        <section id="actions" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </section>
+        <br/>
+
+        <section id="login">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" th:action="@{/login}">
+                                    <div class="form-group">
+                                        <label for="username">Usuario:</label>
+                                        <input type="text" name="username" id="username" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" />
+                                    </div>
+                                    <input class="btn btn-primary btn-block" type="submit" value="Login"/> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer th:replace="plantillas/plantilla :: footer"></footer>
+    </body>
+</html>

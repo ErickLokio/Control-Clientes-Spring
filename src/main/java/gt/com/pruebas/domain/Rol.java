@@ -23,5 +23,6 @@ public class Rol implements Serializable{
     
     @NotEmpty
     private String nombre ;
-
+    
+    private String hola= "Hola mundo";
 }

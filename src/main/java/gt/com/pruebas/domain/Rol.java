@@ -22,7 +22,5 @@ public class Rol implements Serializable{
     private Long idRol;
     
     @NotEmpty
-    private String nombre ;
-    
-    private String hola= "Hola mundo";
+    private String nombre;
 }

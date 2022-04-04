@@ -1,8 +1,9 @@
 package gt.com.pruebas.web;
 
 import gt.com.pruebas.domain.Persona;
+import gt.com.pruebas.domain.Usuario;
 import gt.com.pruebas.servicio.PersonaService;
-import java.util.ArrayList;
+import gt.com.pruebas.servicio.UsuarioServiceInterface;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ControladorInicio {
     
     @Autowired
     private PersonaService personaService;
+    
+    @Autowired
+    private UsuarioServiceInterface usuarioServiceInterface;
 
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
@@ -70,5 +74,45 @@ public class ControladorInicio {
         personaService.eliminarPersona(persona);
         return "redirect:/";
     }
-
+    
+    
+    /* ------------- USUARIOS ---------------------- */
+    
+    @GetMapping("/listarUsuario")
+    public String inicio(Model model){
+        
+        List<Usuario> usuario = usuarioServiceInterface.listarUsuarios();
+        model.addAttribute("usuarios", usuario);
+        
+        return "index";
+    }
+    
+    @GetMapping("/agregarUsuario")
+    public String agregarUsuario(Usuario usuario){
+        return "modificarUsuario";
+    }
+    
+    @PostMapping("/guardarUsuario")
+    public String guardarUsuario(@Valid Usuario usuario, Errors  errores){
+        if(errores.hasErrors()){
+            return "modificarUsuario";
+        }
+        
+        usuarioServiceInterface.guardarUsuario(usuario);
+        return "redirect/";
+    }
+    
+    @GetMapping("/editarUsuario/{idUsuario}")
+    public String editarUsuario(Model model, Usuario usuario){
+        usuario = usuarioServiceInterface.encontrarUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "modificarUsuario";
+    }
+    
+    @GetMapping("/eliminarUsuario/{idUsuario}")
+    public String eliminarUsuario(Usuario usuario){
+        usuarioServiceInterface.eliminarUsuario(usuario);
+        return "redirect/";
+    }
+    
 }
